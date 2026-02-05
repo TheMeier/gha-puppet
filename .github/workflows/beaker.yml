@@ -175,11 +175,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ${{ inputs.additional_packages }}
       - name: Setup podman
-       if: ${{ inputs.beaker_hypervisor == 'container_podman' }}
-       run: |
-         sudo podman system service --time=0 unix:///var/run/docker.sock &
-         sudo chown runner /var/run/docker.sock
-         echo "DOCKER_HOST=unix:///var/run/docker.sock" >> "$GITHUB_ENV"
+        if: ${{ inputs.beaker_hypervisor == 'container_podman' }}
+        run: |
+          sudo podman system service --time=0 unix:///var/run/docker.sock &
+          sudo chown runner /var/run/docker.sock
+          echo "DOCKER_HOST=unix:///var/run/docker.sock" >> "$GITHUB_ENV"
       - name: Setup libvirt for Vagrant
         if: ${{ inputs.beaker_hypervisor == 'vagrant_libvirt' && inputs.install_vagrant_dependencies == true }}
         run: |
